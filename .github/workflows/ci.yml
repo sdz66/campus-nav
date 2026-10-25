@@ -16,7 +16,7 @@ jobs:
         run: |
           apt-get update && apt-get install -y --no-install-recommends \
             ros-jazzy-slam-toolbox ros-jazzy-robot-localization ros-jazzy-navigation2 \
-            ros-jazzy-nav2-bringup python3-colcon-common-extensions libgeographic-dev \
+            ros-jazzy-nav2-bringup python3-colcon-common-extensions libgeographiclib-dev \
             python3-pyproj python3-requests python3-pytest
           . /opt/ros/jazzy/setup.sh
 
