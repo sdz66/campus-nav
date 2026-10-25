@@ -6,13 +6,18 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(GeographicLib REQUIRED)
+# GeographicLib 2.x（noble）的 CMake config 名称与 1.x 不同，骨架期设为可选；
+# W1 实装坐标链时以实机 `cmake --find-package` 结果定死并改回 REQUIRED
+find_package(GeographicLib QUIET)
 
 add_library(${PROJECT_NAME} src/helmert.cpp src/map_json.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC ${GeographicLib_LIBRARIES})
+if(GeographicLib_FOUND)
+  target_link_libraries(${PROJECT_NAME} PUBLIC ${GeographicLib_LIBRARIES})
+  target_compile_definitions(${PROJECT_NAME} PUBLIC CAMPUS_COORD_HAS_GEOGRAPHICLIB=1)
+endif()
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
