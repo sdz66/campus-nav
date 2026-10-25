@@ -15,7 +15,7 @@ set(MSG_FILES
   msg/MapMeta.msg
 )
 
-rosidl_generate_interfaces(${PROJECT_NAME} ${MSG_FILES})
+rosidl_generate_interfaces(${PROJECT_NAME} ${MSG_FILES} DEPENDENCIES std_msgs)
 
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()
