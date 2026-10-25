@@ -9,9 +9,10 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(campus_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 add_executable(pose_arbiter src/pose_arbiter.cpp)
-ament_target_dependencies(pose_arbiter rclcpp campus_msgs geometry_msgs)
+ament_target_dependencies(pose_arbiter rclcpp campus_msgs geometry_msgs sensor_msgs)
 target_compile_features(pose_arbiter PUBLIC cxx_std_17)
 
 install(TARGETS pose_arbiter DESTINATION lib/${PROJECT_NAME})
