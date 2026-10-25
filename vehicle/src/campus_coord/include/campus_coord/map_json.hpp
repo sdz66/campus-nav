@@ -4,6 +4,7 @@
  * @file map_json.hpp
  * @brief map.json 读写——datum/锚点/退化区/精度的单一事实来源（docs/architecture.md §2.2）
  */
+#include <array>
 #include <optional>
 #include <string>
 #include <vector>
