@@ -1,0 +1,33 @@
+# Nav2 参数（骨架，W10-W11 调参；完整参数用 `ros2 param dump` 从 nav2_bringup 基线导出后裁剪）
+# 规划器：Smac Hybrid-A*（非完整约束车辆主流选择）；参考路径作为代价先验
+# 控制器：RPP（Regulated Pure Pursuit，低速车首选）
+amcl: ros__parameters: {}
+bt_navigator:
+  ros__parameters:
+    default_nav_to_pose_bt_xml: ""   # 行为树：M4 用默认 navigate_to_pose
+planner_server:
+  ros__parameters:
+    expected_planner_frequency: 1.0
+    planner_plugins: [GridBased]
+    GridBased:
+      plugin: nav2_smac_planner/SmacPlannerHybrid
+      motion_model_for_search: DUBIN   # 差速底盘可改 OMNI
+      minimum_turning_radius: 1.5      # 按实车标定
+controller_server:
+  ros__parameters:
+    controller_plugins: [FollowPath]
+    FollowPath:
+      plugin: nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController
+      desired_linear_vel: 1.0          # 校园限速（m/s）
+      max_linear_accel: 1.0
+      max_angular_accel: 2.0
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      resolution: 0.05
+      robot_radius: 0.4
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      resolution: 0.05
+      robot_radius: 0.4

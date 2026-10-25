@@ -1,0 +1,17 @@
+# colcon
+vehicle/build/
+vehicle/install/
+vehicle/log/
+
+# 地图二进制走 Git LFS（*.pgm 由 .gitattributes 声明）
+maps/*/*.pgm
+
+# Python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

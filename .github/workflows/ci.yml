@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    container: ros:jazzy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends \
+            ros-jazzy-slam-toolbox ros-jazzy-robot-localization ros-jazzy-navigation2 \
+            ros-jazzy-nav2-bringup python3-colcon-common-extensions libgeographic-dev \
+            python3-pyproj python3-requests python3-pytest
+          . /opt/ros/jazzy/setup.sh
+
+      - name: Build (vehicle)
+        shell: bash
+        working-directory: vehicle
+        run: |
+          . /opt/ros/jazzy/setup.sh
+          colcon build --symlink-install
+
+      - name: Test (vehicle)
+        shell: bash
+        working-directory: vehicle
+        run: |
+          . /opt/ros/jazzy/setup.sh
+          . install/setup.sh
+          colcon test
+          colcon test-result --verbose
+
+      # 云端域服务（A2 起逐个接入；当前仅骨架，契约先行）
+      - name: Cloud contracts guard
+        shell: bash
+        run: |
+          test -f docs/contracts.md && test -f docs/architecture.md && echo "architecture docs present" 

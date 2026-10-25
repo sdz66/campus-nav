@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- 校园低速车 URDF 骨架：base_link + 激光/IMU/RTK 天线外参 -->
+<!-- 外参值 W3 标定后回填（SOP 第 0 步）；标定文件随数据一起上传（14 章采集要求） -->
+<robot name="campus_bot">
+  <link name="base_link">
+    <visual><geometry><box size="0.9 0.6 0.4"/></geometry></visual>
+    <inertial><mass value="60"/><inertia ixx="5.0" iyy="8.0" izz="10.0" ixy="0" ixz="0" iyz="0"/></inertial>
+  </link>
+
+  <link name="laser_link"/>
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link"/><child link="laser_link"/>
+    <origin xyz="0.45 0 0.35" rpy="0 0 0"/>   <!-- TODO(W3): 实测回填 -->
+  </joint>
+
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/><child link="imu_link"/>
+    <origin xyz="0.0 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <link name="gps_antenna_link"/>
+  <joint name="gps_antenna_joint" type="fixed">
+    <parent link="base_link"/><child link="gps_antenna_link"/>
+    <origin xyz="-0.2 0 0.8" rpy="0 0 0"/>    <!-- RTK 天线，杆臂影响 navsat_transform -->
+  </joint>
+</robot>

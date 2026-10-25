@@ -1,0 +1,27 @@
+# AMCL —— 基准地图点云匹配（2D 栅格地图重定位）
+# 调参顺序：仿真粗调（Gazebo GNSS 噪声）→ 实车精调（PlotJuggler 四联图评估）
+amcl:
+  ros__parameters:
+    use_sim_time: false
+    alpha1: 0.2        # 平移→旋转噪声
+    alpha2: 0.2
+    alpha3: 0.2
+    alpha4: 0.2
+    alpha5: 0.2
+    base_frame_id: base_link
+    odom_frame_id: odom
+    global_frame_id: map
+    scan_topic: scan           # M7 风险：3D 激光时换 NDT/small_gicp 路线
+    map_topic: /map
+    max_beams: 60
+    min_particles: 500
+    max_particles: 2000
+    pf_err: 0.05
+    pf_tol: 0.1                # 得分阈值 → pose_arbiter 的 SCAN_LOST 判据
+    laser_model_type: likelihood_field
+    laser_max_range: 20.0
+    set_initial_pose: false    # 全场重定位能力：G2 验收项
+    resample_interval: 1
+    transform_tolerance: 0.5
+    update_min_a: 0.1          # 转过 0.1 rad 才更新
+    update_min_d: 0.15         # 走过 0.15 m 才更新（降频省 CPU）

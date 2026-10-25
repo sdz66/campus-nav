@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>campus_bringup</name>
+  <version>0.1.0</version>
+  <description>系统启动：launch / URDF / 参数（车端与仿真两套配置）</description>
+  <maintainer email="dev@example.com">campus-nav team</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>campus_localization</exec_depend>
+  <exec_depend>campus_planning</exec_depend>
+  <exec_depend>campus_gz_sim</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

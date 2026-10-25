@@ -1,0 +1,21 @@
+统一开发环境：Ubuntu 24.04.5.1 LTS+ ROS 2 Jazzy
+
+代码编写：C++、Python3、VS Code
+
+团队协作：Git（快照-本地分布式-分支合并）-git push-github审核-github合并
+
+工作空间：colcon——工作空间、代码包调度工具
+
+编译工具：CMake（C/C++）、Python直接编译
+
+仿真工具：Gazebo Harmonic、ros_gz
+
+可视化：Rviz2—呈现激光点云雷达、相机图像等
+
+图形可视化：rqt—数据节点可视化、快速排查
+
+数据波形分析：PlotJuggler—画误差曲线、分析2D曲线图
+
+具体的工作对应具体的工具栈：如点云处理—PCL；经纬度/地理空间等—GeographicLib、pyproj；导航框架—Nav2
+
+

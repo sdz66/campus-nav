@@ -1,0 +1,29 @@
+# ekf_global —— 全局链：AMCL 位姿 + RTK 修正（map→odom，无长期漂移）
+# pose_arbiter 在退化态通过重映射/参数动态调整 GPS 量测权重
+ekf_filter_node:
+  ros__parameters:
+    frequency: 30.0
+    sensor_timeout: 0.5
+    two_d_mode: true
+
+    odom0: /amcl_pose_ratio     # AMCL 位姿（由 arbiter 门控转发）
+    odom0_config: [true,  true,  false,
+                   false, false, true,
+                   false, false, false,
+                   false, false, false,
+                   false, false, false]
+    odom0_differential: false
+
+    odom1: /gps/enu_pose        # navsat_transform 输出的 ENU 位姿（退化态被 arbiter 断开）
+    odom1_config: [true,  true,  false,
+                   false, false, false,
+                   false, false, false,
+                   false, false, false,
+                   false, false, false]
+    odom1_differential: false
+
+    publish_tf: true
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: map            # 全局链发布 map→odom

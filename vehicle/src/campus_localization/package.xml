@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>campus_localization</name>
+  <version>0.1.0</version>
+  <description>定位栈：双 EKF（局部/全局）+ AMCL 配置 + pose_arbiter 降级仲裁（三源融合）</description>
+  <maintainer email="dev@example.com">campus-nav team</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>campus_msgs</depend>
+  <depend>robot_localization</depend>
+  <depend>nav2_amcl</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <exec_depend>ros2launch</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
